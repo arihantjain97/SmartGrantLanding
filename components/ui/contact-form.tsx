@@ -49,7 +49,10 @@ export function ContactForm({
   });
 
   function onSubmit(values: FormValues) {
-    console.log(values);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('Form submission:', values);
+    }
+    
     // In a real implementation, this would send the form data to a server
     setTimeout(() => {
       if (onSuccess) onSuccess();

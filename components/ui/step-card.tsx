@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DivideIcon as LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import * as LucideIcons from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface StepCardProps {
   title: string;
@@ -21,10 +21,11 @@ export function StepCard({
   step,
   className,
 }: StepCardProps) {
-  // Get the icon component dynamically
-  const IconComponent = (LucideIcons as Record<string, LucideIcon>)[
-    icon.charAt(0).toUpperCase() + icon.slice(1)
-  ] || LucideIcons.CircleDot;
+  // Get the icon component with proper type safety
+  const iconName = icon.charAt(0).toUpperCase() + icon.slice(1);
+  const IconComponent = 
+    (LucideIcons as unknown as Record<string, React.FC<LucideProps>>)[iconName] ?? 
+    LucideIcons.CircleDot;
 
   return (
     <motion.div

@@ -3,7 +3,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import * as LucideIcons from 'lucide-react';
-import { type LucideProps } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface FeatureCardProps {
   title: string;
@@ -18,10 +19,11 @@ export function FeatureCard({
   icon,
   index,
 }: FeatureCardProps) {
-  // Get the icon component dynamically
-  const IconComponent = (LucideIcons as Record<string, React.ComponentType<LucideProps>>)[
-    icon.charAt(0).toUpperCase() + icon.slice(1)
-  ] || LucideIcons.CircleDot;
+  // Get the icon component with proper type safety
+  const iconName = icon.charAt(0).toUpperCase() + icon.slice(1);
+  const IconComponent = 
+    (LucideIcons as unknown as Record<string, React.FC<LucideProps>>)[iconName] ?? 
+    LucideIcons.CircleDot;
 
   return (
     <motion.div
