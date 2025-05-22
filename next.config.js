@@ -11,9 +11,8 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   webpack: (config, { dev, isServer }) => {
-    if (dev && isServer) {
-      config.cache = false;
-    }
+    // Disable webpack cache in all environments to prevent ENOENT errors
+    config.cache = false;
     return config;
   },
 };

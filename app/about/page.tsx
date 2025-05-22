@@ -50,19 +50,16 @@ export default function About() {
               
               <div className="space-y-6 text-muted-foreground">
                 <p>
-                  SmartGrant was founded in May 2025 by Jane Chen and Michael Wong, who experienced firsthand the challenges SMEs face when applying for government grants in Singapore.
+                  SmartGrant was founded in May 2025 by Romil Jain and Medha Jain to transform how Singapore SMEs access government funding.
                 </p>
                 <p>
-                  After helping hundreds of businesses secure government funding as traditional consultants, they realized there had to be a better way. The process was slow, expensive, and often inaccessible to smaller businesses.
+                  Romil, a 20+ year veteran in IT and transformation programs, saw the need for faster, more intelligent systems to support complex compliance and reporting. Medha brought deep experience from frontline roles at Citi and UOB, where she saw firsthand how underserved SMEs were in the funding process.
                 </p>
                 <p>
-                  With backgrounds in grant consulting and AI engineering, they set out to create a platform that would make the grant application process faster, more affordable, and accessible to all Singapore SMEs.
-                </p>
-                <p>
-                  Today, SmartGrant is revolutionizing how businesses access government funding by leveraging AI to automate the entire grant process, from eligibility matching to proposal generation and compliance tracking.
+                  Together, they set out to build an AI-driven platform that bridges the gap between opportunity and access — automating eligibility checks, proposal generation, and compliance tracking.
                 </p>
                 <p className="font-medium">
-                  Our vision is to help 10,000 Singapore SMEs access government funding by 2028, unlocking SGD 500M in grants to fuel business growth and innovation.
+                  Their mission is to unlock SGD 500M in grants for 10,000 Singapore SMEs by 2028, fueling innovation, growth, and equitable access to government support.
                 </p>
               </div>
             </div>

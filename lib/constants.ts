@@ -212,38 +212,26 @@ export const investorMetrics = {
 
 export const teamMembers = [
   {
-    name: 'Jane Chen',
-    title: 'CEO & Co-Founder',
-    bio: 'Former grant consultant with 10+ years experience helping SMEs secure government funding. Ex-Enterprise Singapore.',
+    name: 'Romil Jain',
+    title: 'Co-Founder',
+    bio: 'Technology transformation leader with extensive experience in banking and financial services. Expert in digital innovation and regulatory systems.',
+    image: 'https://media.licdn.com/dms/image/v2/C4D03AQGkhuVjJdfwRQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1517056267459?e=1753315200&v=beta&t=ptmYoc0CB7NPgsMNE1rXuQ2ecGZdKQIH2NfffvPtqHA',
+  },
+  {
+    name: 'Medha Jain',
+    title: 'Co-Founder',
+    bio: 'Financial services expert with deep experience in client operations and compliance at leading banks in Singapore.',
     image: 'https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    name: 'Michael Wong',
-    title: 'CTO & Co-Founder',
-    bio: 'AI engineer with background in NLP and document processing. Previously built automation systems at GovTech Singapore.',
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    name: 'Priya Sharma',
-    title: 'Head of Customer Success',
-    bio: 'Expert in SME business development with 8+ years experience in customer onboarding and support for SaaS platforms.',
-    image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
-  {
-    name: 'David Tan',
-    title: 'Head of Partnerships',
-    bio: 'Former Business Development Director with extensive network across Singapore\'s business ecosystem and government agencies.',
-    image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-  },
+  }
 ];
 
 export const companyInfo = {
   name: 'SmartGrant PTE. LTD.',
   uen: '202520884E',
   founded: 'May 14, 2025',
-  address: '80 Robinson Road, #08-01, Singapore 068898',
+  address: '6 Shenton Way, #12-11B OUE Downtown, Singapore 068809',
   email: 'contact@smartgrant.sg',
-  phone: '+65 6123 4567',
+  phone: '+65 9190 90567',
 };
 
 export const techStack = [
