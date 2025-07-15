@@ -230,8 +230,8 @@ export const companyInfo = {
   uen: '202520884E',
   founded: 'May 14, 2025',
   address: '6 Shenton Way, #12-11B OUE Downtown, Singapore 068809',
-  email: 'contact@smartgrant.sg',
-  phone: '+65 9190 90567',
+  email: 'romil.j@smartgrant.com.sg',
+  phone: '+65 91090567',
 };
 
 export const techStack = [
