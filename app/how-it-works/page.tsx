@@ -1,269 +1,419 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { SectionHeading } from '@/components/ui/section-heading';
-import { StepCard } from '@/components/ui/step-card';
-import { howItWorks } from '@/lib/constants';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { 
+  Building2, 
+  Users, 
+  ShoppingCart, 
+  ArrowRight, 
+  CheckCircle, 
+  Clock, 
+  TrendingUp,
+  Zap,
+  Target,
+  BarChart3
+} from 'lucide-react';
+import { personas } from '@/lib/personas';
+
+const personaConfig = {
+  SME: {
+    icon: Building2,
+    color: 'bg-blue-500',
+    gradient: 'from-blue-500 to-blue-600',
+    image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    stats: [
+      { label: 'Average Time Saved', value: '15 hours', icon: Clock },
+      { label: 'Success Rate', value: '78%', icon: TrendingUp },
+      { label: 'Grants Matched', value: '12+', icon: Target }
+    ],
+    journey: [
+      {
+        step: 1,
+        title: 'Grant Feasibility Checker',
+        description: 'Complete our smart questionnaire in under 5 minutes',
+        icon: Building2,
+        details: ['Company information', 'Industry classification', 'Revenue & employee count', 'Growth objectives']
+      },
+      {
+        step: 2,
+        title: 'AI Grant Matching',
+        description: 'Our AI analyzes 100+ eligibility criteria instantly',
+        icon: Zap,
+        details: ['Real-time eligibility checking', 'Compatibility scoring', 'Funding amount estimates', 'Application deadlines']
+      },
+      {
+        step: 3,
+        title: 'Proposal Generation',
+        description: 'AI drafts customized proposals for your top matches',
+        icon: BarChart3,
+        details: ['Tailored content generation', 'Government requirement compliance', 'Financial projections', 'Supporting documentation']
+      },
+      {
+        step: 4,
+        title: 'Submit & Track',
+        description: 'Monitor progress and maintain compliance effortlessly',
+        icon: CheckCircle,
+        details: ['Application submission', 'Status tracking', 'Compliance reminders', 'Success analytics']
+      }
+    ]
+  },
+  Consultant: {
+    icon: Users,
+    color: 'bg-green-500',
+    gradient: 'from-green-500 to-green-600',
+    image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    stats: [
+      { label: 'Lead Conversion', value: '65%', icon: TrendingUp },
+      { label: 'Client Capacity', value: '3x', icon: Users },
+      { label: 'Revenue Growth', value: '40%', icon: BarChart3 }
+    ],
+    journey: [
+      {
+        step: 1,
+        title: 'Lead Intelligence',
+        description: 'Access warm SME leads actively seeking grant funding',
+        icon: Target,
+        details: ['Pre-qualified prospects', 'Grant readiness scores', 'Contact information', 'Funding requirements']
+      },
+      {
+        step: 2,
+        title: 'Collaborative Workspace',
+        description: 'Work seamlessly with clients on grant applications',
+        icon: Users,
+        details: ['Shared project dashboards', 'Real-time collaboration', 'Document management', 'Client communication tools']
+      },
+      {
+        step: 3,
+        title: 'Automated Proposals',
+        description: 'Generate professional proposals with AI assistance',
+        icon: Zap,
+        details: ['Template customization', 'AI content suggestions', 'Compliance checking', 'Version control']
+      },
+      {
+        step: 4,
+        title: 'Success Tracking',
+        description: 'Monitor all client applications from one dashboard',
+        icon: BarChart3,
+        details: ['Portfolio overview', 'Success metrics', 'Client reporting', 'Performance analytics']
+      }
+    ]
+  },
+  Vendor: {
+    icon: ShoppingCart,
+    color: 'bg-purple-500',
+    gradient: 'from-purple-500 to-purple-600',
+    image: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    stats: [
+      { label: 'Qualified Leads', value: '200+', icon: Target },
+      { label: 'Conversion Rate', value: '45%', icon: TrendingUp },
+      { label: 'Average Deal Size', value: '$85K', icon: BarChart3 }
+    ],
+    journey: [
+      {
+        step: 1,
+        title: 'Product Listing',
+        description: 'Showcase PSG-eligible solutions to qualified buyers',
+        icon: ShoppingCart,
+        details: ['Product catalog', 'Grant alignment docs', 'Pricing transparency', 'Compliance certificates']
+      },
+      {
+        step: 2,
+        title: 'Smart Matching',
+        description: 'Connect with SMEs seeking your specific solutions',
+        icon: Target,
+        details: ['Buyer-seller matching', 'Requirements analysis', 'Budget compatibility', 'Timeline alignment']
+      },
+      {
+        step: 3,
+        title: 'Quote Builder',
+        description: 'Generate grant-compliant quotes instantly',
+        icon: Zap,
+        details: ['Automated pricing', 'Grant calculation tools', 'Proposal templates', 'Approval workflows']
+      },
+      {
+        step: 4,
+        title: 'Relationship Management',
+        description: 'Build lasting partnerships with data-driven insights',
+        icon: Users,
+        details: ['Client relationship tracking', 'Performance analytics', 'Repeat business alerts', 'Trust score building']
+      }
+    ]
+  }
+};
 
 export default function HowItWorks() {
+  const [activePersona, setActivePersona] = useState('SME');
+  const [activeStep, setActiveStep] = useState(1);
+
+  const currentPersona = personaConfig[activePersona as keyof typeof personaConfig];
+
   return (
-    <>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20 bg-muted">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background -z-10" />
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            >
-              How SmartGrant Works
-            </motion.h1>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-muted-foreground"
-            >
-              Our AI-powered platform simplifies the grant application process from end to end, helping Singapore SMEs access funding faster and with less effort.
-            </motion.p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <Badge variant="outline" className="mb-6 px-4 py-2">
+              Tailored for Every User Type
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              How SmartGrant Works for You
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Discover how our AI-powered platform transforms grant applications for SMEs, consultants, and vendors across Singapore.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Process Overview */}
-      <section className="py-16 md:py-24">
+      {/* Persona Selector */}
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <SectionHeading 
-            title="Our Four-Step Process" 
-            subtitle="SmartGrant makes grant applications simple with our streamlined process."
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {howItWorks.map((step, index) => (
-              <StepCard
-                key={index}
-                title={step.title}
-                description={step.description}
-                icon={step.icon}
-                step={index + 1}
-              />
+          <Tabs value={activePersona} onValueChange={setActivePersona} className="max-w-6xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3 mb-12 h-16">
+              {Object.entries(personaConfig).map(([key, config]) => {
+                const IconComponent = config.icon;
+                return (
+                  <TabsTrigger 
+                    key={key} 
+                    value={key} 
+                    className="flex items-center gap-2 text-base font-medium h-full"
+                  >
+                    <IconComponent className="w-5 h-5" />
+                    {key}
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            {Object.entries(personaConfig).map(([key, config]) => (
+              <TabsContent key={key} value={key} className="mt-0">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {/* Persona Overview */}
+                  <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                    <div>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className={`p-3 rounded-xl ${config.color} text-white`}>
+                          <config.icon className="w-8 h-8" />
+                        </div>
+                        <div>
+                          <h2 className="text-3xl font-bold">{key}</h2>
+                          <p className="text-muted-foreground">User Journey</p>
+                        </div>
+                      </div>
+                      
+                      <h3 className="text-2xl font-semibold mb-4">
+                        {personas[key as keyof typeof personas].hero}
+                      </h3>
+                      
+                      <ul className="space-y-3 mb-8">
+                        {personas[key as keyof typeof personas].bullets.map((bullet, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                            <span className="text-muted-foreground">{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Stats */}
+                      <div className="grid grid-cols-3 gap-4">
+                        {config.stats.map((stat, idx) => (
+                          <Card key={idx} className="p-4 text-center">
+                            <stat.icon className="w-6 h-6 mx-auto mb-2 text-primary" />
+                            <div className="text-2xl font-bold">{stat.value}</div>
+                            <div className="text-xs text-muted-foreground">{stat.label}</div>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="relative">
+                      <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <Image
+                          src={config.image}
+                          alt={`${key} workflow`}
+                          width={600}
+                          height={400}
+                          className="w-full object-cover"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-tr ${config.gradient} opacity-20`} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Journey Steps */}
+                  <div className="mb-16">
+                    <h3 className="text-2xl font-bold text-center mb-12">Your Journey with SmartGrant</h3>
+                    
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {config.journey.map((step, idx) => (
+                        <motion.div
+                          key={step.step}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: idx * 0.1 }}
+                          className="relative"
+                        >
+                          <Card className="p-6 h-full hover:shadow-lg transition-all cursor-pointer group"
+                                onClick={() => setActiveStep(step.step)}>
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className={`w-10 h-10 rounded-full ${config.color} text-white flex items-center justify-center font-bold`}>
+                                {step.step}
+                              </div>
+                              <step.icon className="w-6 h-6 text-primary" />
+                            </div>
+                            
+                            <h4 className="font-semibold mb-2 group-hover:text-primary transition-colors">
+                              {step.title}
+                            </h4>
+                            <p className="text-sm text-muted-foreground mb-4">
+                              {step.description}
+                            </p>
+                            
+                            <ul className="space-y-1">
+                              {step.details.slice(0, 2).map((detail, detailIdx) => (
+                                <li key={detailIdx} className="text-xs text-muted-foreground flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-primary rounded-full" />
+                                  {detail}
+                                </li>
+                              ))}
+                            </ul>
+                            
+                            {idx < config.journey.length - 1 && (
+                              <ArrowRight className="hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 text-muted-foreground" />
+                            )}
+                          </Card>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Detailed Step View */}
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeStep}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-8"
+                    >
+                      {(() => {
+                        const step = config.journey.find(s => s.step === activeStep);
+                        if (!step) return null;
+                        
+                        return (
+                          <div className="grid lg:grid-cols-2 gap-8 items-center">
+                            <div>
+                              <div className="flex items-center gap-3 mb-4">
+                                <div className={`w-12 h-12 rounded-full ${config.color} text-white flex items-center justify-center font-bold text-lg`}>
+                                  {step.step}
+                                </div>
+                                <div>
+                                  <h4 className="text-2xl font-bold">{step.title}</h4>
+                                  <p className="text-muted-foreground">Step {step.step} of 4</p>
+                                </div>
+                              </div>
+                              
+                              <p className="text-lg mb-6">{step.description}</p>
+                              
+                              <div className="grid grid-cols-2 gap-4">
+                                {step.details.map((detail, idx) => (
+                                  <div key={idx} className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+                                    <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                                    <span className="text-sm">{detail}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div className="relative">
+                              <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
+                                <step.icon className="w-16 h-16 text-gray-400" />
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                    </motion.div>
+                  </AnimatePresence>
+                </motion.div>
+              </TabsContent>
             ))}
-          </div>
-          
-          <div className="bg-muted rounded-lg p-6 md:p-10">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="md:w-1/2">
-                <h3 className="text-2xl font-bold mb-4">Our Technology Platform</h3>
-                <p className="mb-4 text-muted-foreground">
-                  SmartGrant uses advanced AI and natural language processing to analyze your business profile and match it with available grant opportunities. Our platform then generates customized proposals that meet all government requirements.
-                </p>
-                <p className="mb-4 text-muted-foreground">
-                  The entire process is automated, ensuring accuracy and consistency while dramatically reducing the time and effort needed to apply for grants.
-                </p>
-                <p className="font-semibold">Powered by Azure OpenAI Service and Microsoft's secure cloud infrastructure.</p>
-              </div>
-              <div className="md:w-1/2 relative rounded-lg overflow-hidden shadow-lg">
-                <Image 
-                  src="https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                  alt="SmartGrant Technology" 
-                  width={600} 
-                  height={400}
-                  className="w-full"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Steps */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            title="A Closer Look at Each Step" 
-            subtitle="Here's a more detailed breakdown of how SmartGrant helps you through each phase of the grant application process."
-          />
-          
-          {/* Step 1 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center gap-12 mb-20"
-          >
-            <div className="md:w-1/2">
-              <div className="bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">1</div>
-              <h3 className="text-2xl font-bold mb-4">Onboard</h3>
-              <p className="mb-4 text-muted-foreground">
-                Getting started with SmartGrant is simple. Complete our 5-minute business profile questionnaire, providing details about your company, industry, size, and specific needs.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Our smart form adapts to your responses, asking only relevant questions to build a comprehensive understanding of your business. You'll only need to complete this profile once, and it can be updated anytime as your business evolves.
-              </p>
-              <div className="bg-muted p-4 rounded-md">
-                <p className="font-medium mb-2">What we collect:</p>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Basic company information</li>
-                  <li>Industry and business activities</li>
-                  <li>Financial overview</li>
-                  <li>Growth plans and objectives</li>
-                  <li>Previous grant experience (if any)</li>
-                </ul>
-              </div>
-            </div>
-            <div className="md:w-1/2 relative rounded-lg overflow-hidden shadow-lg">
-              <Image 
-                src="https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Onboarding Process" 
-                width={600} 
-                height={400}
-                className="w-full"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Step 2 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row-reverse items-center gap-12 mb-20"
-          >
-            <div className="md:w-1/2">
-              <div className="bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">2</div>
-              <h3 className="text-2xl font-bold mb-4">Match</h3>
-              <p className="mb-4 text-muted-foreground">
-                Our proprietary AI algorithm analyzes your business profile against all available government grants in Singapore, considering over 100 eligibility criteria and business factors.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Within minutes, you'll receive a personalized list of grants you're eligible for, ranked by match percentage and potential funding amount. Each match includes a detailed explanation of why it's suitable for your business.
-              </p>
-              <div className="bg-muted p-4 rounded-md">
-                <p className="font-medium mb-2">Key features:</p>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>95% accuracy in grant matching</li>
-                  <li>Real-time updates as new grants become available</li>
-                  <li>Detailed eligibility explanations</li>
-                  <li>Funding amount estimates</li>
-                </ul>
-              </div>
-            </div>
-            <div className="md:w-1/2 relative rounded-lg overflow-hidden shadow-lg">
-              <Image 
-                src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Grant Matching" 
-                width={600} 
-                height={400}
-                className="w-full"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Step 3 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row items-center gap-12 mb-20"
-          >
-            <div className="md:w-1/2">
-              <div className="bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">3</div>
-              <h3 className="text-2xl font-bold mb-4">Generate</h3>
-              <p className="mb-4 text-muted-foreground">
-                Select the grants you want to pursue, and SmartGrant will automatically generate customized proposal drafts tailored to your business and the specific requirements of each grant.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Our AI analyzes successful applications and government guidelines to create compelling proposals. You'll have the opportunity to review and refine the generated content before submission.
-              </p>
-              <div className="bg-muted p-4 rounded-md">
-                <p className="font-medium mb-2">What you get:</p>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Complete proposal drafts</li>
-                  <li>Required supporting documentation list</li>
-                  <li>Budget templates</li>
-                  <li>Implementation timelines</li>
-                  <li>Editable content with AI suggestions</li>
-                </ul>
-              </div>
-            </div>
-            <div className="md:w-1/2 relative rounded-lg overflow-hidden shadow-lg">
-              <Image 
-                src="https://images.pexels.com/photos/7376/startup-photos.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Proposal Generation" 
-                width={600} 
-                height={400}
-                className="w-full"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Step 4 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row-reverse items-center gap-12"
-          >
-            <div className="md:w-1/2">
-              <div className="bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-4">4</div>
-              <h3 className="text-2xl font-bold mb-4">Track</h3>
-              <p className="mb-4 text-muted-foreground">
-                After submission, SmartGrant continues to work for you by tracking your application status and ensuring you stay compliant with all post-approval requirements.
-              </p>
-              <p className="mb-4 text-muted-foreground">
-                Our compliance tracking system monitors deadlines, documentation requirements, and reporting obligations, sending you timely reminders and guiding you through each step of the post-approval process.
-              </p>
-              <div className="bg-muted p-4 rounded-md">
-                <p className="font-medium mb-2">Tracking features:</p>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  <li>Real-time application status updates</li>
-                  <li>Automated compliance calendar</li>
-                  <li>Document management system</li>
-                  <li>Milestone tracking</li>
-                  <li>Funding disbursement monitoring</li>
-                </ul>
-              </div>
-            </div>
-            <div className="md:w-1/2 relative rounded-lg overflow-hidden shadow-lg">
-              <Image 
-                src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Application Tracking" 
-                width={600} 
-                height={400}
-                className="w-full"
-              />
-            </div>
-          </motion.div>
+          </Tabs>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Simplify Your Grant Applications?</h2>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
-            Join our pilot program today and be among the first to experience the future of grant automation.
-          </p>
-          <Button 
-            size="lg" 
-            variant="secondary" 
-            className="bg-white text-primary hover:bg-white/90"
-            asChild
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto"
           >
-            <Link href="/pilot-program">Join Our Pilot Program</Link>
-          </Button>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Transform Your Grant Process?
+            </h2>
+            <p className="text-xl opacity-90 mb-8">
+              Join hundreds of Singapore businesses already using SmartGrant to secure funding faster and more efficiently.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="bg-white text-primary hover:bg-white/90"
+                asChild
+              >
+                <Link href="/pilot-program">Start Your Journey</Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-primary"
+                asChild
+              >
+                <Link href="/target-grants">Explore Grants</Link>
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
-    </>
+
+      {/* Social Proof */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-2xl font-bold mb-8">Trusted by Singapore's Leading Businesses</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-12 bg-gray-300 rounded-lg flex items-center justify-center">
+                  <span className="text-gray-500 font-medium">Company {i}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

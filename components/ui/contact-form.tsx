@@ -27,7 +27,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 interface ContactFormProps {
-  type?: 'contact' | 'pilot' | 'investor';
+  type?: 'contact' | 'pilot';
   onSuccess?: () => void;
   className?: string;
 }
@@ -64,8 +64,6 @@ export function ContactForm({
     switch (type) {
       case 'pilot':
         return 'Join Pilot Program';
-      case 'investor':
-        return 'Request Investor Deck';
       default:
         return 'Send Message';
     }
@@ -75,8 +73,6 @@ export function ContactForm({
     switch (type) {
       case 'pilot':
         return 'Tell us about your business and what grants you\'re interested in...';
-      case 'investor':
-        return 'Tell us about your investment interests and any questions you have...';
       default:
         return 'How can we help you?';
     }

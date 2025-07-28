@@ -57,16 +57,10 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-        </nav>
-
-        <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" asChild>
-            <Link href="/login">Login</Link>
-          </Button>
           <Button asChild>
-            <Link href="/pilot-program">Join Pilot</Link>
+            <Link href="/pilot-trial-signup">Pilot Trial</Link>
           </Button>
-        </div>
+        </nav>
 
         {/* Mobile Menu Button */}
         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -96,18 +90,11 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t flex flex-col space-y-3">
-                <Button variant="outline" asChild className="w-full">
-                  <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                    Login
-                  </Link>
-                </Button>
                 <Button asChild className="w-full">
-                  <Link href="/pilot-program" onClick={() => setIsMobileMenuOpen(false)}>
-                    Join Pilot
+                  <Link href="/pilot-trial-signup" onClick={() => setIsMobileMenuOpen(false)}>
+                    Pilot Trial
                   </Link>
                 </Button>
-              </div>
             </nav>
           </SheetContent>
         </Sheet>
