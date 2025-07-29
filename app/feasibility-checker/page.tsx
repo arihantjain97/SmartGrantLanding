@@ -22,28 +22,39 @@ export default function FeasibilityChecker() {
     const { toast } = useToast();
 
     const handleNext = () => {
+        console.log('➡️ [FeasibilityChecker] Next button clicked. Current step:', currentStep);
         if (currentStep === totalSteps) {
+            console.log('🚀 [FeasibilityChecker] Generating report...');
             setFormState('generating');
             setTimeout(() => {
+                console.log('📊 [FeasibilityChecker] Report generated, showing results');
                 setFormState('report');
             }, 3000);
         } else {
             setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+            console.log('✅ [FeasibilityChecker] Moved to step:', currentStep + 1);
         }
     };
 
-    const handleBack = () => setCurrentStep(prev => Math.max(prev - 1, 1));
+    const handleBack = () => {
+        console.log('⬅️ [FeasibilityChecker] Back button clicked. Current step:', currentStep);
+        setCurrentStep(prev => Math.max(prev - 1, 1));
+        console.log('✅ [FeasibilityChecker] Moved to step:', currentStep - 1);
+    };
 
     const updateFormData = (field: string, value: any) => {
+        console.log('📝 [FeasibilityChecker] Updating form data:', { field, value });
         setFormData(prev => ({ ...prev, [field]: value }));
     };
     
     // Simulate voice input
     const handleVoiceInput = (field: string, mockValue: string) => {
+        console.log('🎤 [FeasibilityChecker] Voice input triggered:', { field, mockValue });
         setIsListening(true);
         setTimeout(() => {
             updateFormData(field, mockValue);
             setIsListening(false);
+            console.log('✅ [FeasibilityChecker] Voice input completed');
         }, 2000);
     };
 
@@ -59,17 +70,56 @@ export default function FeasibilityChecker() {
     };
     
     const isStepComplete = useMemo(() => {
+        let isComplete = false;
+        
         switch (currentStep) {
-            case 1: return formData.businessArea && formData.projectSummary;
-            case 2: return formData.businessName && formData.industry;
-            case 3: return formData.eligibility?.shareholding30 && formData.eligibility?.employees200 && formData.eligibility?.operating6mo;
-            case 4: return formData.expandOverseas !== undefined;
-            case 5: return true; // No validation needed for readiness display
-            default: return false;
+            case 1: 
+                isComplete = !!(formData.businessArea && formData.projectSummary);
+                console.log('🔍 [FeasibilityChecker] Step 1 validation:', { 
+                    businessArea: !!formData.businessArea, 
+                    projectSummary: !!formData.projectSummary, 
+                    isComplete 
+                });
+                break;
+            case 2: 
+                isComplete = !!(formData.businessName && formData.industry);
+                console.log('🔍 [FeasibilityChecker] Step 2 validation:', { 
+                    businessName: !!formData.businessName, 
+                    industry: !!formData.industry, 
+                    isComplete 
+                });
+                break;
+            case 3: 
+                isComplete = !!(formData.eligibility?.shareholding30 && formData.eligibility?.employees200 && formData.eligibility?.operating6mo);
+                console.log('🔍 [FeasibilityChecker] Step 3 validation:', { 
+                    shareholding30: formData.eligibility?.shareholding30, 
+                    employees200: formData.eligibility?.employees200, 
+                    operating6mo: formData.eligibility?.operating6mo, 
+                    isComplete 
+                });
+                break;
+            case 4: 
+                isComplete = formData.expandOverseas !== undefined;
+                console.log('🔍 [FeasibilityChecker] Step 4 validation:', { 
+                    expandOverseas: formData.expandOverseas, 
+                    isComplete 
+                });
+                break;
+            case 5: 
+                isComplete = true; // No validation needed for readiness display
+                console.log('🔍 [FeasibilityChecker] Step 5 validation: Always complete (readiness display)');
+                break;
+            default: 
+                isComplete = false;
+                console.log('❌ [FeasibilityChecker] Unknown step validation:', currentStep);
         }
+        
+        return isComplete;
     }, [formData, currentStep]);
 
     const handleEmailSubmit = (email: string) => {
+        console.log('📧 [FeasibilityChecker] Email submission triggered:', email);
+        
         const lead: Lead = {
             id: nanoid(),
             businessName: formData.businessName || '',
@@ -86,14 +136,26 @@ export default function FeasibilityChecker() {
             createdAt: new Date(),
         };
 
+        console.log('📋 [FeasibilityChecker] Created lead object:', {
+            id: lead.id,
+            businessName: lead.businessName,
+            topGrant: lead.topGrant,
+            readiness: lead.readiness
+        });
+
         if (process.env.NODE_ENV !== 'production') {
+            console.log('💾 [FeasibilityChecker] Storing lead in development mode');
             leadStore.add(lead);
+        } else {
+            console.log('🚫 [FeasibilityChecker] Skipping lead storage in production mode');
         }
 
         toast({
             title: "Email sent!",
             description: "We've sent your feasibility report to your inbox.",
         });
+        
+        console.log('✅ [FeasibilityChecker] Email submission completed');
     };
 
     if (formState === 'generating') {
