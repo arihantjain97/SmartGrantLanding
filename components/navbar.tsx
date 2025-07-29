@@ -53,6 +53,7 @@ export function Navbar() {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 pathname === link.href ? 'text-primary' : 'text-foreground/70'
               }`}
+              aria-current={pathname === link.href ? 'page' : undefined}
             >
               {link.name}
             </Link>
@@ -85,6 +86,7 @@ export function Navbar() {
                   className={`text-base py-2 px-4 rounded-md transition-colors hover:bg-accent ${
                     pathname === link.href ? 'bg-accent text-primary font-medium' : ''
                   }`}
+                  aria-current={pathname === link.href ? 'page' : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
