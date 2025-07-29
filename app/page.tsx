@@ -109,7 +109,7 @@ export default function Home() {
                 className="bg-white text-primary hover:bg-white/90"
                 asChild
               >
-                <Link href="/beta-signup">Try Beta</Link>
+                <Link href="/beta-signup">Try Pilot</Link>
               </Button>
             </div>
           </div>

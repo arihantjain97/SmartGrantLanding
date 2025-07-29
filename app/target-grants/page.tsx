@@ -143,9 +143,6 @@ export default function TargetGrants() {
             <p className="text-muted-foreground mb-4">
               SmartGrant combines the best of both worlds: the affordability of self-service with the expertise of consultants.
             </p>
-            <Button asChild>
-              <Link href="/pricing">View Our Pricing</Link>
-            </Button>
           </div>
         </div>
       </section>
