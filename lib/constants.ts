@@ -5,7 +5,6 @@ export const navigationLinks = [
   { name: 'Pilot Trial', href: '/pilot-program' },
   { name: 'FAQs', href: '/faqs' },
   { name: 'About', href: '/about' },
-  { name: 'Grant Checker', href: '/feasibility-checker' },
 ];
 
 export const footerLinks = [
