@@ -4,6 +4,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // Disable server components for static export
+    serverComponentsExternalPackages: [],
+  },
   images: { 
     unoptimized: true,
     domains: ['images.pexels.com'],
@@ -13,6 +17,17 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     // Disable webpack cache in all environments to prevent ENOENT errors
     config.cache = false;
+    
+    // Handle client-side only modules
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
     return config;
   },
 };
