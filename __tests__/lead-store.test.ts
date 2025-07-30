@@ -13,6 +13,8 @@ describe('LeadStore', () => {
       id: 'test-id',
       businessName: 'Test Company',
       industry: 'Technology',
+      businessArea: 'Adopt IT solutions',
+      projectSummary: 'Implementing a new CRM system',
       eligibility: {
         shareholding30: true,
         employees200: true,
@@ -37,6 +39,8 @@ describe('LeadStore', () => {
       id: 'test-id-1',
       businessName: 'Test Company 1',
       industry: 'Technology',
+      businessArea: 'Adopt IT solutions',
+      projectSummary: 'Implementing a new CRM system',
       eligibility: {
         shareholding30: true,
         employees200: true,
@@ -52,6 +56,8 @@ describe('LeadStore', () => {
       id: 'test-id-2',
       businessName: 'Test Company 2',
       industry: 'Retail',
+      businessArea: 'Improve operational processes',
+      projectSummary: 'Streamlining inventory management',
       eligibility: {
         shareholding30: true,
         employees200: true,
@@ -82,6 +88,8 @@ describe('LeadStore', () => {
       id: 'test-id',
       businessName: 'Test Company',
       industry: 'Technology',
+      businessArea: 'Adopt IT solutions',
+      projectSummary: 'Implementing a new CRM system',
       eligibility: {
         shareholding30: true,
         employees200: true,
@@ -109,6 +117,8 @@ describe('LeadStore', () => {
       id: 'test-id',
       businessName: 'Test Company',
       industry: 'Technology',
+      businessArea: 'Adopt IT solutions',
+      projectSummary: 'Implementing a new CRM system',
       eligibility: {
         shareholding30: true,
         employees200: true,
