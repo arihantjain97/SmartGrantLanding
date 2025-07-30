@@ -62,13 +62,19 @@ export default function FeasibilityChecker() {
   const updateFormData = (field: string, value: any) => {
     if (field.includes('.')) {
       const [parent, child] = field.split('.');
-      setFormData(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof typeof prev],
-          [child]: value
+      setFormData(prev => {
+        const parentObj = prev[parent as keyof typeof prev];
+        if (parentObj && typeof parentObj === 'object') {
+          return {
+            ...prev,
+            [parent]: {
+              ...parentObj,
+              [child]: value
+            }
+          };
         }
-      }));
+        return prev;
+      });
     } else {
       setFormData(prev => ({ ...prev, [field]: value }));
     }
