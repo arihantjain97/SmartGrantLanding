@@ -4,6 +4,8 @@ export type Lead = {
   id: string;
   businessName: string;
   industry: string;
+  businessArea?: string;
+  projectSummary?: string;
   eligibility: {
     shareholding30: boolean;
     employees200: boolean;
@@ -24,6 +26,8 @@ class LeadStore {
       id: lead.id,
       businessName: lead.businessName,
       industry: lead.industry,
+      businessArea: lead.businessArea,
+      projectSummary: lead.projectSummary,
       topGrant: lead.topGrant,
       readiness: lead.readiness,
       email: lead.email,
