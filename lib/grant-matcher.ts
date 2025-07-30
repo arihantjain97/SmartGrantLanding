@@ -1,12 +1,15 @@
 import type { Lead } from './lead-store';
 
 export function matchGrants(leadData: Partial<Lead>): "PSG" | "EDG" | "MRA" {
-  console.log('🎯 [GrantMatcher] Matching grants for lead data:', {
-    businessName: leadData.businessName,
-    industry: leadData.industry,
-    eligibility: leadData.eligibility,
-    expandOverseas: leadData.expandOverseas
-  });
+  // Check if we're on the client side
+  if (typeof window !== 'undefined') {
+    console.log('🎯 [GrantMatcher] Matching grants for lead data:', {
+      businessName: leadData.businessName,
+      industry: leadData.industry,
+      eligibility: leadData.eligibility,
+      expandOverseas: leadData.expandOverseas
+    });
+  }
 
   // TODO: Replace with OpenAI integration for intelligent grant matching
   // Example OpenAI integration:
@@ -27,7 +30,10 @@ export function matchGrants(leadData: Partial<Lead>): "PSG" | "EDG" | "MRA" {
 
   // For now, return PSG as the default match
   const matchedGrant = "PSG";
-  console.log('✅ [GrantMatcher] Grant matched:', matchedGrant);
+  
+  if (typeof window !== 'undefined') {
+    console.log('✅ [GrantMatcher] Grant matched:', matchedGrant);
+  }
   
   return matchedGrant;
 } 

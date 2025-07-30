@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ArrowRight, ArrowLeft, Mic, Loader2, CheckCircle, FileText, Building, BarChart2, Globe, HelpCircle, Users, Edit, Download, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,9 +19,16 @@ export default function FeasibilityChecker() {
     const [formData, setFormData] = useState<Partial<Lead>>({});
     const [isListening, setIsListening] = useState(false);
     const [formState, setFormState] = useState<'filling' | 'generating' | 'report'>('filling');
+    const [isClient, setIsClient] = useState(false);
     const { toast } = useToast();
 
+    // Ensure we're on the client side
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const handleNext = () => {
+        if (!isClient) return;
         console.log('➡️ [FeasibilityChecker] Next button clicked. Current step:', currentStep);
         if (currentStep === totalSteps) {
             console.log('🚀 [FeasibilityChecker] Generating report...');
@@ -37,18 +44,21 @@ export default function FeasibilityChecker() {
     };
 
     const handleBack = () => {
+        if (!isClient) return;
         console.log('⬅️ [FeasibilityChecker] Back button clicked. Current step:', currentStep);
         setCurrentStep(prev => Math.max(prev - 1, 1));
         console.log('✅ [FeasibilityChecker] Moved to step:', currentStep - 1);
     };
 
     const updateFormData = (field: string, value: any) => {
+        if (!isClient) return;
         console.log('📝 [FeasibilityChecker] Updating form data:', { field, value });
         setFormData(prev => ({ ...prev, [field]: value }));
     };
     
     // Simulate voice input
     const handleVoiceInput = (field: string, mockValue: string) => {
+        if (!isClient) return;
         console.log('🎤 [FeasibilityChecker] Voice input triggered:', { field, mockValue });
         setIsListening(true);
         setTimeout(() => {
@@ -59,6 +69,8 @@ export default function FeasibilityChecker() {
     };
 
     const renderStep = () => {
+        if (!isClient) return <div>Loading...</div>;
+        
         switch (currentStep) {
             case 1: return <Step1 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
             case 2: return <Step2 data={formData} update={updateFormData} onVoice={handleVoiceInput} />;
@@ -70,6 +82,8 @@ export default function FeasibilityChecker() {
     };
     
     const isStepComplete = useMemo(() => {
+        if (!isClient) return false;
+        
         let isComplete = false;
         
         switch (currentStep) {
@@ -115,9 +129,11 @@ export default function FeasibilityChecker() {
         }
         
         return isComplete;
-    }, [formData, currentStep]);
+    }, [formData, currentStep, isClient]);
 
     const handleEmailSubmit = (email: string) => {
+        if (!isClient) return;
+        
         console.log('📧 [FeasibilityChecker] Email submission triggered:', email);
         
         const lead: Lead = {
@@ -160,6 +176,19 @@ export default function FeasibilityChecker() {
         
         console.log('✅ [FeasibilityChecker] Email submission completed');
     };
+
+    if (!isClient) {
+        return (
+            <div className="bg-gray-100 min-h-screen font-sans flex flex-col items-center justify-center p-4">
+                <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-gray-200">
+                    <div className="text-center">
+                        <Loader2 className="animate-spin mx-auto mb-4" size={40} />
+                        <h1 className="text-2xl font-bold text-gray-800">Loading...</h1>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (formState === 'generating') {
         return <GeneratingReport />;

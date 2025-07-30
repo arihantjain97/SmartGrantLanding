@@ -20,8 +20,18 @@ export type Lead = {
 
 class LeadStore {
   private leads: Lead[] = [];
+  private isClient = false;
+
+  constructor() {
+    // Check if we're on the client side
+    if (typeof window !== 'undefined') {
+      this.isClient = true;
+    }
+  }
 
   add(lead: Lead) {
+    if (!this.isClient) return;
+    
     console.log('🔵 [LeadStore] Adding new lead:', {
       id: lead.id,
       businessName: lead.businessName,
@@ -39,17 +49,23 @@ class LeadStore {
   }
 
   list() {
+    if (!this.isClient) return [];
+    
     console.log('📋 [LeadStore] Listing all leads. Count:', this.leads.length);
     return [...this.leads];
   }
 
   clear() {
+    if (!this.isClient) return;
+    
     console.log('🗑️ [LeadStore] Clearing all leads. Previous count:', this.leads.length);
     this.leads = [];
     console.log('✅ [LeadStore] All leads cleared');
   }
 
   getById(id: string) {
+    if (!this.isClient) return undefined;
+    
     console.log('🔍 [LeadStore] Looking for lead with ID:', id);
     const lead = this.leads.find(lead => lead.id === id);
     if (lead) {

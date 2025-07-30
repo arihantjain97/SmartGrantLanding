@@ -170,8 +170,15 @@ function toast({ ...props }: Toast) {
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
+  const [isClient, setIsClient] = React.useState(false);
 
   React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isClient) return;
+    
     listeners.push(setState);
     return () => {
       const index = listeners.indexOf(setState);
@@ -179,12 +186,12 @@ function useToast() {
         listeners.splice(index, 1);
       }
     };
-  }, [state]);
+  }, [isClient]);
 
   return {
     ...state,
-    toast,
-    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
+    toast: isClient ? toast : () => ({ id: '', dismiss: () => {}, update: () => {} }),
+    dismiss: isClient ? (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }) : () => {},
   };
 }
 
