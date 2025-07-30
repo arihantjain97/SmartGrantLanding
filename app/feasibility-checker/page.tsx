@@ -405,7 +405,11 @@ const Step2 = ({ data, update, onVoice }: { data: Partial<Lead>; update: (field:
 );
 
 const Step3 = ({ data, update, onVoice }: { data: Partial<Lead>; update: (field: string, value: any) => void; onVoice: (field: string, value: string) => void }) => {
-    const eligibility = data.eligibility || {};
+    const eligibility = data.eligibility || {
+        shareholding30: false,
+        employees200: false,
+        operating6mo: false,
+    };
     const hasAnyNo = Object.values(eligibility).some(value => value === false);
 
     const updateEligibility = (field: string, value: boolean) => {
