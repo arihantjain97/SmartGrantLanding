@@ -1,0 +1,56 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables and secrets
+.env
+.env.*
+*.env
+*.env.*
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Build output
+/dist/
+/build/
+coverage/
+
+# Misc
+*.local
+*.log
+
+# Optional: ignore test coverage
+coverage/
+
+# Ignore lock files if not using them
+# package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore public/static uploads (if any)
+public/uploads/
+public/static/uploads/
+
+# Ignore vercel and netlify config (if not needed)
+.vercel/
+.netlify/
+
+# Ignore next-env.d.ts (auto-generated)
+next-env.d.ts 

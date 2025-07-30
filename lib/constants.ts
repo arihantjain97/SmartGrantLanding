@@ -2,9 +2,8 @@ export const navigationLinks = [
   { name: 'Home', href: '/' },
   { name: 'How It Works', href: '/how-it-works' },
   { name: 'Target Grants', href: '/target-grants' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'Pilot Program', href: '/pilot-program' },
-  { name: 'Investors', href: '/investors' },
+  { name: 'Grant Checker', href: '/feasibility-checker' },
+  { name: 'Pilot Trial', href: '/pilot-program' },
   { name: 'FAQs', href: '/faqs' },
   { name: 'About', href: '/about' },
 ];
@@ -201,14 +200,6 @@ export const faqs = [
   }
 ];
 
-export const investorMetrics = {
-  marketSize: '30,000 SME applicants annually in Singapore',
-  year1Revenue: 'SGD 2.7M projected Year 1 revenue',
-  cagr: '30% CAGR over 5 years',
-  investmentAsk: 'SGD 500K for MVP development and market launch',
-  traction: '250+ early access signups',
-  breakeven: 'Month 14 projected breakeven',
-};
 
 export const teamMembers = [
   {

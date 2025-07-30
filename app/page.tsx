@@ -7,9 +7,9 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { FeatureCard } from '@/components/ui/feature-card';
-import { StepCard } from '@/components/ui/step-card';
 import { FAQAccordion } from '@/components/ui/faq-accordion';
-import { features, howItWorks, faqs } from '@/lib/constants';
+import HowItWorksTeaser from '@/components/ui/how-it-works-teaser';
+import { features, faqs } from '@/lib/constants';
 
 export default function Home() {
   return (
@@ -35,7 +35,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
-                  <Link href="/pilot-program">Join Pilot Program</Link>
+                  <Link href="/pilot-trial-signup">Pilot Trial</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="/how-it-works">How It Works</Link>
@@ -89,33 +89,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            title="How SmartGrant Works" 
-            subtitle="Our platform simplifies the entire grant application process in just four easy steps."
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {howItWorks.map((step, index) => (
-              <StepCard
-                key={index}
-                title={step.title}
-                description={step.description}
-                icon={step.icon}
-                step={index + 1}
-              />
-            ))}
-          </div>
-          
-          <div className="mt-16 text-center">
-            <Button size="lg" asChild>
-              <Link href="/how-it-works">Learn More</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* How It Works Teaser */}
+      <HowItWorksTeaser />
 
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
@@ -134,7 +109,7 @@ export default function Home() {
                 className="bg-white text-primary hover:bg-white/90"
                 asChild
               >
-                <Link href="/pilot-program">Join Pilot Program</Link>
+                <Link href="/beta-signup">Try Pilot</Link>
               </Button>
             </div>
           </div>
@@ -158,7 +133,7 @@ export default function Home() {
               Still have questions? We're here to help.
             </p>
             <Button variant="outline" asChild>
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/pilot-trial-signup">Pilot Trial</Link>
             </Button>
           </div>
         </div>
