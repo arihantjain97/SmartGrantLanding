@@ -171,8 +171,8 @@ export default function About() {
             
             <div className="mt-12 bg-card p-6 rounded-lg shadow-sm">
               <h3 className="text-xl font-bold mb-4">How Our AI Works</h3>
-              <p className="text-muted-foreground mb-6">
-                SmartGrant uses advanced artificial intelligence and natural language processing to automate the grant application process:
+              <p className="text-lg text-muted-foreground mb-6">
+                Our AI-powered platform is designed to generate customized proposals that meet government requirements while highlighting your business's unique strengths. We're building the most comprehensive grant automation solution for Singapore SMEs.
               </p>
               
               <div className="space-y-4">

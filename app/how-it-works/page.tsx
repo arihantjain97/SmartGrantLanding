@@ -29,9 +29,9 @@ const personaConfig = {
     gradient: 'from-blue-500 to-blue-600',
     image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     stats: [
-      { label: 'Average Time Saved', value: '15 hours', icon: Clock },
-      { label: 'Success Rate', value: '78%', icon: TrendingUp },
-      { label: 'Grants Matched', value: '12+', icon: Target }
+      { label: 'Time Saved', value: '15 hours', icon: Clock },
+      { label: 'Grants Available', value: '12+', icon: Target },
+      { label: 'AI-Powered', value: '100%', icon: TrendingUp }
     ],
     journey: [
       {
@@ -375,7 +375,7 @@ export default function HowItWorks() {
               Ready to Transform Your Grant Process?
             </h2>
             <p className="text-xl opacity-90 mb-8">
-              Join hundreds of Singapore businesses already using SmartGrant to secure funding faster and more efficiently.
+              Join our pilot program and be among the first to experience the future of grant automation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -389,7 +389,7 @@ export default function HowItWorks() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-primary"
+                className="border-white text-primary hover:bg-white hover:text-primary"
                 asChild
               >
                 <Link href="/target-grants">Explore Grants</Link>

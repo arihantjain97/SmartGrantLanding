@@ -59,12 +59,21 @@ export default function TargetGrants() {
           </div>
           
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-6">
               SmartGrant continuously updates its database with the latest grant programs.
             </p>
-            <Button asChild>
-              <Link href="/pilot-program">Check Your Eligibility</Link>
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              asChild
+            >
+              <Link href="/eligibility-checker">
+                🚀 Check Your Eligibility Now
+              </Link>
             </Button>
+            <p className="text-sm text-muted-foreground mt-3">
+              Get instant results in under 2 minutes!
+            </p>
           </div>
         </div>
       </section>

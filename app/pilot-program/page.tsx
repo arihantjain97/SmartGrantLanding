@@ -191,7 +191,7 @@ export default function PilotProgram() {
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-4xl font-extrabold mb-4 drop-shadow-lg">Ready to Transform Your Grant Process?</h2>
             <p className="text-lg opacity-90 mb-8">
-              Join hundreds of SMEs, consultants, and vendors who are already signed up for early access to SmartGrant.
+              Join our exclusive pilot program and be among the first to experience the future of grant automation.
             </p>
             <Button 
               size="lg" 

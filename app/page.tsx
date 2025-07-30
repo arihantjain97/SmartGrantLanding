@@ -42,7 +42,7 @@ export default function Home() {
                 </Button>
               </div>
               <p className="mt-6 text-sm text-muted-foreground">
-                <span className="font-semibold">250+ businesses</span> already signed up for early access
+                <span className="font-semibold">Join our pilot program</span> and be among the first to experience AI-powered grant automation
               </p>
             </motion.div>
             
@@ -109,7 +109,7 @@ export default function Home() {
                 className="bg-white text-primary hover:bg-white/90"
                 asChild
               >
-                <Link href="/beta-signup">Try Pilot</Link>
+                <Link href="/pilot-trial-signup">Try Pilot</Link>
               </Button>
             </div>
           </div>

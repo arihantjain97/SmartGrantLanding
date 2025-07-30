@@ -20,7 +20,7 @@ const grantFaqs = [
   },
   {
     question: 'What are the typical approval rates for Singapore SME grants?',
-    answer: 'Approval rates vary by grant program, but generally range from 30% to 70%. Factors affecting approval include how well your project aligns with grant objectives, the quality of your application, and available funding. SmartGrant users experience an average approval rate of 78%, significantly higher than the industry average.'
+    answer: 'Approval rates vary by grant program, but generally range from 30% to 70%. Factors affecting approval include how well your project aligns with grant objectives, the quality of your application, and available funding. SmartGrant is designed to help you submit the strongest possible application by ensuring compliance with all requirements.'
   },
   {
     question: 'How long does the grant application process usually take?',

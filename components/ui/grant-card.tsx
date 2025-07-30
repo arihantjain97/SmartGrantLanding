@@ -52,10 +52,6 @@ export function GrantCard({
           ))}
         </ul>
       </div>
-      
-      <div className="mt-auto">
-        <Button className="w-full">Check Eligibility</Button>
-      </div>
     </motion.div>
   );
 }
