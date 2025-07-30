@@ -2,7 +2,6 @@ export const navigationLinks = [
   { name: 'Home', href: '/' },
   { name: 'How It Works', href: '/how-it-works' },
   { name: 'Target Grants', href: '/target-grants' },
-  { name: 'Grant Checker', href: '/feasibility-checker' },
   { name: 'Pilot Trial', href: '/pilot-program' },
   { name: 'FAQs', href: '/faqs' },
   { name: 'About', href: '/about' },
