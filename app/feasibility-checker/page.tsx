@@ -124,6 +124,8 @@ export default function FeasibilityChecker() {
             id: nanoid(),
             businessName: formData.businessName || '',
             industry: formData.industry || '',
+            businessArea: formData.businessArea || '',
+            projectSummary: formData.projectSummary || '',
             eligibility: {
                 shareholding30: formData.eligibility?.shareholding30 || false,
                 employees200: formData.eligibility?.employees200 || false,
@@ -139,6 +141,7 @@ export default function FeasibilityChecker() {
         console.log('📋 [FeasibilityChecker] Created lead object:', {
             id: lead.id,
             businessName: lead.businessName,
+            businessArea: lead.businessArea,
             topGrant: lead.topGrant,
             readiness: lead.readiness
         });
