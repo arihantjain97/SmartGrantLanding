@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { GrantCard } from '@/components/ui/grant-card';
@@ -10,6 +11,17 @@ import { ComparisonTable } from '@/components/ui/comparison-table';
 import { targetGrants } from '@/lib/constants';
 
 export default function TargetGrants() {
+  const handleEligibilityCheck = () => {
+    // Open the external URL in a new tab
+    window.open('https://ect.smartgrant.com.sg/', '_blank');
+    
+    // Show toast notification
+    toast.success('Eligibility tool opened in new tab!', {
+      description: 'You can now check your grant eligibility on the external platform.',
+      duration: 4000,
+    });
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -65,11 +77,9 @@ export default function TargetGrants() {
             <Button 
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              asChild
+              onClick={handleEligibilityCheck}
             >
-              <Link href="/eligibility-checker">
-                🚀 Check Your Eligibility Now
-              </Link>
+              🚀 Check Your Eligibility Now
             </Button>
             <p className="text-sm text-muted-foreground mt-3">
               Get instant results in under 2 minutes!
