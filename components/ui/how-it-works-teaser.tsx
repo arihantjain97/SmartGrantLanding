@@ -39,9 +39,10 @@ export default function HowItWorksTeaser() {
 
         <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
           {Object.entries(personas).map(([key, val]) => (
-            <div 
-              key={key} 
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200"
+            <Link
+              key={key}
+              href={`/how-it-works?role=${key}`}
+              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200 block"
             >
               {/* Icon Header */}
               <div className="flex items-center gap-4 mb-6">
@@ -73,19 +74,16 @@ export default function HowItWorksTeaser() {
               </ul>
               
               {/* CTA Link */}
-              <Link
-                href={`/how-it-works#${key.toLowerCase()}`}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors group-hover:gap-3"
-              >
+              <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3">
                 <span>See full workflow</span>
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </Link>
+              </div>
               
               {/* Subtle gradient overlay on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${personaConfig[key as keyof typeof personaConfig].gradient} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300 pointer-events-none`} />
-            </div>
+            </Link>
           ))}
         </div>
       </div>

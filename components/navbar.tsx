@@ -57,8 +57,8 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
-          <Button asChild>
-            <Link href="/pilot/login">Pilot Trial</Link>
+          <Button asChild className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border-0">
+            <Link href="/pilot/login">Get Started</Link>
           </Button>
         </nav>
 
@@ -90,9 +90,9 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-                <Button asChild className="w-full">
+                <Button asChild className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border-0">
                   <Link href="/pilot/login" onClick={() => setIsMobileMenuOpen(false)}>
-                    Pilot Trial
+                    Get Started
                   </Link>
                 </Button>
             </nav>

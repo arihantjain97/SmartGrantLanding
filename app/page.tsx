@@ -35,7 +35,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
-                  <Link href="/pilot/login">Pilot Trial</Link>
+                  <Link href="/pilot-program">Pilot Trial</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="/how-it-works">How It Works</Link>
@@ -109,7 +109,7 @@ export default function Home() {
                 className="bg-white text-primary hover:bg-white/90"
                 asChild
               >
-                <Link href="/pilot/login">Try Pilot</Link>
+                <Link href="/pilot-program">Try Pilot</Link>
               </Button>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function Home() {
               Still have questions? We're here to help.
             </p>
             <Button variant="outline" asChild>
-              <Link href="/pilot/login">Pilot Trial</Link>
+              <Link href="/pilot-program">Pilot Trial</Link>
             </Button>
           </div>
         </div>

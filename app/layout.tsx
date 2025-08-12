@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://smartgrant.sg'),
   title: 'SmartGrant | AI-Powered Grant Automation for SMEs',
   description: 'SmartGrant automates grant matching, drafting, and compliance for Singapore SMEs. Fast, simple, and affordable.',
   openGraph: {

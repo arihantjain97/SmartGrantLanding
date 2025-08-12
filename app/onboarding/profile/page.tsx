@@ -106,7 +106,7 @@ export default function OnboardingProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 pt-24 pb-8">
       <div className="max-w-md mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
