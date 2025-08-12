@@ -130,7 +130,7 @@ export default function PilotProgram() {
                       Ready to Get Started?
                     </h3>
                     <Button size="lg" className="w-full mb-4 transition-transform hover:scale-105" asChild>
-                      <Link href="/pilot-trial-signup">
+                      <Link href="/pilot/login">
                         Join the Pilot Trial →
                       </Link>
                     </Button>
@@ -199,7 +199,7 @@ export default function PilotProgram() {
               className="bg-white text-primary hover:bg-white/90 text-xl font-bold px-10 py-6 shadow-xl transition-transform hover:scale-105"
               asChild
             >
-              <Link href="/pilot-trial-signup">Join the Pilot Trial</Link>
+              <Link href="/pilot/login">Join the Pilot Trial</Link>
             </Button>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function PilotProgram() {
               Ready to get started?
             </p>
             <Button asChild className="transition-transform hover:scale-105">
-              <Link href="/pilot-trial-signup">Join the Pilot Trial</Link>
+              <Link href="/pilot/login">Join the Pilot Trial</Link>
             </Button>
           </div>
         </div>

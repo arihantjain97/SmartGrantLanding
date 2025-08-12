@@ -12,18 +12,14 @@ export const footerLinks = [
     title: 'Company',
     links: [
       { name: 'About', href: '/about' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Privacy Policy', href: '/privacy-policy' },
-      { name: 'Terms of Service', href: '/terms-of-service' },
+      { name: 'FAQs', href: '/faqs' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { name: 'FAQs', href: '/faqs' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Grants Guide', href: '/grants-guide' },
-      { name: 'Success Stories', href: '/success-stories' },
+      { name: 'How It Works', href: '/how-it-works' },
+      { name: 'Target Grants', href: '/target-grants' },
     ],
   },
   {
