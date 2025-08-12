@@ -159,71 +159,8 @@ export default function FAQs() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
             <Button size="lg" asChild>
-              <Link href="/contact">Contact Us</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
               <Link href="/pilot-program">Join Pilot Program</Link>
             </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Resources Section */}
-      <section className="py-16 md:py-24 bg-muted">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            title="Grant Resources" 
-            subtitle="Helpful resources to learn more about Singapore SME grants."
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="bg-card p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-xl font-bold mb-4">Grant Eligibility Guide</h3>
-              <p className="text-muted-foreground mb-4">
-                A comprehensive guide to understanding eligibility criteria for major Singapore SME grants.
-              </p>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/resources/eligibility-guide">Download Guide</Link>
-              </Button>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-card p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-xl font-bold mb-4">Grant Application Checklist</h3>
-              <p className="text-muted-foreground mb-4">
-                A detailed checklist of documents and information needed for successful grant applications.
-              </p>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/resources/application-checklist">Download Checklist</Link>
-              </Button>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-card p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-xl font-bold mb-4">Grant Success Stories</h3>
-              <p className="text-muted-foreground mb-4">
-                Case studies of businesses that successfully secured grants with SmartGrant.
-              </p>
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/resources/success-stories">Read Stories</Link>
-              </Button>
-            </motion.div>
           </div>
         </div>
       </section>
