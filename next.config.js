@@ -28,6 +28,12 @@ const nextConfig = {
       };
     }
     
+    // Suppress Supabase WebSocket warnings
+    config.ignoreWarnings = [
+      /Critical dependency: the request of a dependency is an expression/,
+      /Module not found: Can't resolve 'encoding'/,
+    ];
+    
     return config;
   },
 };

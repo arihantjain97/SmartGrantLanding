@@ -58,7 +58,7 @@ export function Navbar() {
             </Link>
           ))}
           <Button asChild>
-            <Link href="/pilot-trial-signup">Pilot Trial</Link>
+            <Link href="/pilot/login">Pilot Trial</Link>
           </Button>
         </nav>
 
@@ -91,7 +91,7 @@ export function Navbar() {
                 </Link>
               ))}
                 <Button asChild className="w-full">
-                  <Link href="/pilot-trial-signup" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link href="/pilot/login" onClick={() => setIsMobileMenuOpen(false)}>
                     Pilot Trial
                   </Link>
                 </Button>
