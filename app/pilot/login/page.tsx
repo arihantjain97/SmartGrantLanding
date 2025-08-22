@@ -34,7 +34,9 @@ export default function PilotLogin() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: window.location.origin + '/pilot/after'
+          redirectTo: process.env.NEXT_PUBLIC_SITE_URL 
+            ? `${process.env.NEXT_PUBLIC_SITE_URL}/pilot/after`
+            : `${window.location.origin}/pilot/after`
         }
       });
       
@@ -59,7 +61,9 @@ export default function PilotLogin() {
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: window.location.origin + '/pilot/after'
+          emailRedirectTo: process.env.NEXT_PUBLIC_SITE_URL 
+            ? `${process.env.NEXT_PUBLIC_SITE_URL}/pilot/after`
+            : `${window.location.origin}/pilot/after`
         }
       });
       
