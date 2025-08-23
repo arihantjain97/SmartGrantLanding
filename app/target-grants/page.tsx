@@ -12,14 +12,8 @@ import { targetGrants } from '@/lib/constants';
 
 export default function TargetGrants() {
   const handleEligibilityCheck = () => {
-    // Open the external URL in a new tab
-    window.open('https://ect.smartgrant.com.sg/', '_blank');
-    
-    // Show toast notification
-    toast.success('Eligibility tool opened in new tab!', {
-      description: 'You can now check your grant eligibility on the external platform.',
-      duration: 4000,
-    });
+    // Navigate to the internal eligibility checker
+    window.location.href = '/target-grants/eligibility-checker';
   };
 
   return (

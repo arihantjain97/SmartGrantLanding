@@ -9,6 +9,7 @@ export default function PilotAfter() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [hasRedirected, setHasRedirected] = useState(false);
 
   useEffect(() => {
     const handleAuthRedirect = async () => {
@@ -28,10 +29,11 @@ export default function PilotAfter() {
         }
 
         // 2. Fetch profile
+        console.log('Fetching profile for user:', user.id);
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
           .select('role,onboarding_completed')
-          .eq('id', user.id)
+          .eq('user_id', user.id)
           .maybeSingle();
 
         if (profileError) {
@@ -41,16 +43,48 @@ export default function PilotAfter() {
           return;
         }
 
+        console.log('Profile data:', profile);
+
         // 3. Routing logic
+        if (hasRedirected) {
+          return; // Prevent multiple redirects
+        }
+
         if (!profile) {
-          // No profile exists - go to role selection
+          // No profile exists - create one and go to role selection
+          console.log('Creating new profile for user:', user.id);
+          const { error: insertError } = await supabase
+            .from('profiles')
+            .insert({
+              user_id: user.id,
+              email: user.email,
+              full_name: user.user_metadata?.full_name || null,
+              role: 'SME',
+              onboarding_completed: false
+            });
+
+          if (insertError) {
+            console.error('Error creating profile:', insertError);
+            setError('Failed to create profile');
+            setIsLoading(false);
+            return;
+          }
+
+          console.log('Profile created successfully');
+          setHasRedirected(true);
           router.replace('/onboarding/role');
         } else if (!profile.onboarding_completed) {
           // Profile exists but onboarding not completed - go to profile completion
-          router.replace(`/onboarding/profile?role=${profile.role}`);
+          // Map database role to frontend role format
+          const frontendRole = profile.role.toLowerCase();
+          setHasRedirected(true);
+          router.replace(`/onboarding/profile?role=${frontendRole}`);
         } else {
           // Onboarding completed - go to dashboard
-          router.replace(`/dashboard/${profile.role}`);
+          // Map database role to frontend role format
+          const frontendRole = profile.role.toLowerCase();
+          setHasRedirected(true);
+          router.replace(`/dashboard/${frontendRole}`);
         }
 
       } catch (err) {
@@ -61,7 +95,7 @@ export default function PilotAfter() {
     };
 
     handleAuthRedirect();
-  }, [router]);
+  }, []); // Removed router dependency to prevent infinite loops
 
   if (error) {
     return (

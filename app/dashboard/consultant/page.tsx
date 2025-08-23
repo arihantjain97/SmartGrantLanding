@@ -35,7 +35,7 @@ export default function ConsultantDashboard() {
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('full_name, company, role, onboarding_completed')
-          .eq('id', user.id)
+          .eq('user_id', user.id)
           .single();
 
         if (profileError) {
@@ -44,7 +44,7 @@ export default function ConsultantDashboard() {
           return;
         }
 
-        if (!profileData || profileData.role !== 'consultant') {
+        if (!profileData || profileData.role !== 'CONSULTANT') {
           router.replace('/pilot/login');
           return;
         }

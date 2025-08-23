@@ -40,6 +40,16 @@ export default function OnboardingProfile() {
     checkAuthAndRole();
   }, [router, role]);
 
+  // Map frontend role values to database enum values
+  const mapRoleToDatabase = (frontendRole: string): string => {
+    switch (frontendRole) {
+      case 'sme': return 'SME';
+      case 'consultant': return 'CONSULTANT';
+      case 'vendor': return 'VENDOR';
+      default: return frontendRole.toUpperCase();
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
@@ -59,9 +69,12 @@ export default function OnboardingProfile() {
         timeline: ''
       };
 
+      // Map role to database format
+      const databaseRole = mapRoleToDatabase(role);
+
       // Call the RPC to finish onboarding
       const { error: rpcError } = await supabase.rpc('finish_onboarding', {
-        _role: role,
+        _role: databaseRole,
         _full_name: fullName.trim(),
         _company: company.trim() || null,
         _answers: answers,
