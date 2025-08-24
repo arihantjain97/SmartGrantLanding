@@ -35,7 +35,7 @@ export default function SMEDashboard() {
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('full_name, company, role, onboarding_completed')
-          .eq('id', user.id)
+          .eq('user_id', user.id)
           .single();
 
         if (profileError) {
@@ -44,7 +44,7 @@ export default function SMEDashboard() {
           return;
         }
 
-        if (!profileData || profileData.role !== 'sme') {
+        if (!profileData || profileData.role !== 'SME') {
           router.replace('/pilot/login');
           return;
         }
